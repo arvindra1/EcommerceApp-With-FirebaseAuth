@@ -10,7 +10,7 @@ function Card1({items}) {
         <View className="relative mt-6 mb-1">
             <TouchableWithoutFeedback onPress={()=>navigation.navigate("Product",{...items})}>
                 <Image
-                    source={items.image}
+                     source={{ uri: items.img }}
                     style={{
                         width: 156,
                         height: 200,
