@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
-import { Text, View, Image, Pressable, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import { product } from '../data';
 import CartCard from '../components/CartCard';
+import { useCart } from '../components/CartContex';
 
 function Cart() {
     const navigation = useNavigation();
-    const [cartItems, setCartItems] = useState(product);
 
-    const handleDeleteItem = (itemId) => {
-        // Filter out the item with the given itemId from the cartItems array
-        const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-        setCartItems(updatedCartItems);
+    const { cartItems, dispatch } = useCart();
+
+    const removeFromCart = (id) => {
+        dispatch({ type: 'REMOVE_FROM_CART', id });
     };
+
+    // const handleDeleteItem = (itemId) => {
+    //     // Filter out the item with the given itemId from the cartItems array
+    //     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    //     setCartItems(updatedCartItems);
+    // };
     const handleCheckout = () => {
         // Implement the checkout logic here (e.g., navigate to the payment page, clear the cart, etc.)
         // For this example, we will just show an alert with the total price
         alert(`Total Price: $${totalPrice.toFixed(2)}`);
+        console.log(cartItems.length)
     };
 
 
@@ -55,30 +61,36 @@ function Cart() {
 
                 {/* Cart items */}
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={styles.cartContainer}>
-                        {product.map((item, index) => (
-                            <CartCard item={item} key={index} onDelete={() => handleDeleteItem(item.id)} />
+                    {cartItems.length > 0 ? (<><View style={styles.cartContainer}>
+                        {cartItems.map((item, index) => (
+                            <CartCard item={item} key={index} onDelete={() => removeFromCart(item.id)} />
                         ))}
                     </View>
-                    {/* Total Price Section */}
-                    <View style={styles.totalPriceContainer}>
-                        <Text style={styles.totalPriceText}>Total Price:</Text><Text style={styles.totalPriceText}>${totalPrice.toFixed(2)}</Text>
+                        {/* Total Price Section */}
+                        <View style={styles.totalPriceContainer}>
+                            <Text style={styles.totalPriceText}>Total Price:</Text><Text style={styles.totalPriceText}>${totalPrice.toFixed(2)}</Text>
 
-                    </View>
-                    <View style={styles.totalPriceContainer}>
-                        <Text style={styles.totalPriceText} >Shipping:</Text><Text style={styles.totalPriceText}>$ 0</Text>
+                        </View>
+                        <View style={styles.totalPriceContainer}>
+                            <Text style={styles.totalPriceText} >Shipping:</Text><Text style={styles.totalPriceText}>$ 0</Text>
 
-                    </View>
-                    <View className="mt-2" style={{ borderBottomWidth: 1 }}></View>
-                    <View style={styles.totalPriceContainer}>
-                        <Text style={styles.totalPriceText} >Grand Total:</Text><Text style={styles.totalPriceText}>$ {totalPrice.toFixed(2)}</Text>
+                        </View>
+                        <View className="mt-2" style={{ borderBottomWidth: 1 }}></View>
+                        <View style={styles.totalPriceContainer}>
+                            <Text style={styles.totalPriceText} >Grand Total:</Text><Text style={styles.totalPriceText}>$ {totalPrice.toFixed(2)}</Text>
 
-                    </View>
-                    <View className="mb-20 mt-4 items-center">
-                        <TouchableOpacity onPress={handleCheckout} style={styles.checkoutButton}>
-                            <Text style={styles.checkoutButtonText}>Checkout</Text>
-                        </TouchableOpacity>
-                    </View>
+                        </View>
+                        <View className="mb-20 mt-4 items-center">
+                            <TouchableOpacity onPress={handleCheckout} style={styles.checkoutButton}>
+                                <Text style={styles.checkoutButtonText}>Checkout</Text>
+                            </TouchableOpacity>
+                        </View></>) : (<View style={styles.emptyCartContainer}><Icon
+                            name="shopping-cart"
+                            type="font-awesome"
+                            size={100}
+                            color="#ccc"
+                        />
+                            <Text style={styles.emptyCartText}>Your cart is empty</Text></View>)}
 
                 </ScrollView>
             </View>
@@ -119,6 +131,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    emptyCartContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 180,
     },
 });
 

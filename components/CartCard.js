@@ -10,11 +10,11 @@ const CartCard = ({ item, onDelete }) => {
     return (
         <View style={styles.container}>
             <View style={styles.cartItem}>
-                <Image style={{ width: 112, height: 149, borderRadius: 20 }} source={item.image} />
+                <Image style={{ width: 112, height: 149, borderRadius: 20 }}   source={{uri:item.img}} />
                 <View className="ml-3 ">
                     <Text className="mt-2" style={styles.itemName}>{item.name}</Text>
-                    <Text className="mt-2" style={styles.itemPrice}>${item.price}</Text>
-                    <View className="flex-row justify-start items-center mt-2"><Text className="h-5 w-5 rounded-full" style={{ backgroundColor: 'red' }} /><View className="h-5 w-5 rounded-full justify-center items-center ml-2" style={{ backgroundColor: 'white' }} ><Text>L</Text></View></View>
+                    <Text className="mt-2" style={styles.itemPrice}>$ {item.price}</Text>
+                    <View className="flex-row justify-start items-center mt-2"><Text className="h-5 w-5 rounded-full" style={{ backgroundColor: item.selectedRang }} /><View className="h-5 w-5 rounded-full justify-center items-center ml-2" style={{ backgroundColor: 'white' }} ><Text>{item.selectedSize}</Text></View></View>
                 </View>
 
             </View>
