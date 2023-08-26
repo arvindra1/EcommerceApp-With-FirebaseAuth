@@ -52,6 +52,7 @@ function MyTabs({ handleLogout }) {
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
+<<<<<<< HEAD
         name="HomePage"
         component={AppStack}
         options={{
@@ -74,15 +75,46 @@ function MyTabs({ handleLogout }) {
         component={CategoryScreen}
         options={{
           tabBarStyle: { height: 96 },
+=======
+        name="Home"
+        component={AppStack}
+        options={{
+          tabBarStyle: { height: 96 },
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
           headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color }) => (
             <Icon
               color={color}
+<<<<<<< HEAD
               name="heart"
               size={30}
               solid
               type="font-awesome"
+=======
+              name="home"
+              size={30}
+              solid
+              type="material"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Category"
+        component={CategoryScreen}
+        options={{
+          tabBarStyle: { height: 96 },
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color }) => (
+            <Icon
+              color={color}
+              name="menu"
+              size={30}
+              solid
+              type="material"
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
             />
           ),
         }}
@@ -99,7 +131,11 @@ function MyTabs({ handleLogout }) {
               name="shopping-cart"
               type="font-awesome"
               color={color}
+<<<<<<< HEAD
               size={30}
+=======
+              size={26}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
             />
             <Badge
               status="success"
@@ -110,7 +146,11 @@ function MyTabs({ handleLogout }) {
         }}
       />
       <Tab.Screen
+<<<<<<< HEAD
         name="AccountSettings"
+=======
+        name="Account"
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         options={{
           tabBarStyle: { height: 96 },
           headerShown: false,

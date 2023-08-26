@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { themeColors } from '../../theme';
@@ -75,3 +76,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+=======
+import { View, Text } from 'react-native'
+import React from 'react'
+
+export default function Payment() {
+  return (
+    <View>
+      <Text>Payment</Text>
+    </View>
+  )
+}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd

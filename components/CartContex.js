@@ -1,5 +1,9 @@
 // CartContext.js
+<<<<<<< HEAD
 import React, { createContext, useContext, useReducer, useState } from 'react';
+=======
+import React, { createContext, useContext, useReducer } from 'react';
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
 
 const CartContext = createContext();
 
@@ -14,6 +18,7 @@ const cartReducer = (state, action) => {
   }
 };
 
+<<<<<<< HEAD
 const favReducer = (state, action) => {
   switch (action.type) {
     case 'add_to_favorite':
@@ -48,3 +53,24 @@ const favReducer = (state, action) => {
   };
 
   export { CartProvider, useCart };
+=======
+const CartProvider = ({ children }) => {
+  const [cartItems, dispatch] = useReducer(cartReducer, []);
+
+  return (
+    <CartContext.Provider value={{ cartItems, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+};
+
+export { CartProvider, useCart };
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd

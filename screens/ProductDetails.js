@@ -11,7 +11,11 @@ function ProductDetails(props) {
     const navigation = useNavigation();
     const [rang, setrang] = useState('');
     const [size, setsize] = useState('');
+<<<<<<< HEAD
     const { dispatch, datauser } = useCart();
+=======
+    const { dispatch } = useCart();
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
 
     const addToCart = () => {
         const itemWithSizeAndRang = {
@@ -76,43 +80,67 @@ function ProductDetails(props) {
                             <Pressable
                                 className="h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('S')}
+<<<<<<< HEAD
                                 style={{
                                     alignItems: 'center', justifyContent: 'center',
                                     borderColor: size === 'S' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'S' ? 2 : 0,
                                 }}
+=======
+                                style={{ alignItems: 'center', justifyContent: 'center',
+                                borderColor: size === 'S' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'S' ? 2 : 0, }}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>S</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('M')}
+<<<<<<< HEAD
                                 style={{
                                     alignItems: 'center', justifyContent: 'center',
                                     borderColor: size === 'M' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'M' ? 2 : 0,
                                 }}
+=======
+                                style={{ alignItems: 'center', justifyContent: 'center',
+                                borderColor: size === 'M' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'M' ? 2 : 0, }}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>M</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('L')}
+<<<<<<< HEAD
                                 style={{
                                     alignItems: 'center', justifyContent: 'center', borderColor: size === 'L' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'L' ? 2 : 0,
                                 }}
+=======
+                                style={{ alignItems: 'center', justifyContent: 'center',  borderColor: size === 'L' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'L' ? 2 : 0, }}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>L</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('XL')}
+<<<<<<< HEAD
                                 style={{
                                     alignItems: 'center', justifyContent: 'center',
                                     borderColor: size === 'XL' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'XL' ? 2 : 0,
                                 }}
+=======
+                                style={{ alignItems: 'center', justifyContent: 'center',
+                                borderColor: size === 'XL' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'XL' ? 2 : 0,
+                                 }}
+>>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>XL</Text>
                             </Pressable>
