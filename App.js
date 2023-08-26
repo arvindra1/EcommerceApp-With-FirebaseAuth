@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './navigate/Navigate';
-import Auth from './screens/Auth';
-
+import Auth from './navigate/Auth';
+import { CartProvider } from './components/CartContex';
+import { NativeBaseProvider } from 'native-base';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -21,13 +22,16 @@ export default function App() {
   };
 
   return (
+    
     <NavigationContainer>
       {/* Conditionally render Auth or MyTabs based on the login state */}
+      <CartProvider>
       {isLoggedIn ? (
-        <MyTabs />
+        <MyTabs handleLogout={handleLogout} />
       ) : (
         <Auth onLogin={handleLogin} />
-      )}
+      )}</CartProvider>
     </NavigationContainer>
+   
   );
 }

@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Image, Alert, ScrollView, Pressable } fro
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Card, Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useCart } from '../components/CartContex';
 
 
 function ProductDetails(props) {
@@ -10,6 +11,17 @@ function ProductDetails(props) {
     const navigation = useNavigation();
     const [rang, setrang] = useState('');
     const [size, setsize] = useState('');
+    const { dispatch, datauser } = useCart();
+
+    const addToCart = () => {
+        const itemWithSizeAndRang = {
+            ...product,
+            selectedSize: size,
+            selectedRang: rang,
+        };
+        dispatch({ type: 'ADD_TO_CART', item: itemWithSizeAndRang });
+    };
+
 
     return (
         <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: '#ebe8e8' }}>
@@ -33,7 +45,7 @@ function ProductDetails(props) {
                     />
                     <Image
                         style={{ width: 42, height: 42, borderRadius: 20 }}
-                        source={require('../assets/profile.jpg')}
+                        source={{ uri: datauser.profileImage }}
                     />
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -46,7 +58,7 @@ function ProductDetails(props) {
                             <Image
                                 style={{ width: "100%", height: '100%', borderRadius: 20 }}
                                 resizeMode="contain"
-                                source={product.image}
+                                source={{ uri: product.img }}
                             />
                             {/* <Text>Pranshu Chittora</Text> */}
 
@@ -59,26 +71,104 @@ function ProductDetails(props) {
                         <Text style={{ fontSize: 15, fontWeight: 'bold' }} className="mt-2">$ {product.price}</Text>
                     </View>
                     <View className="mt-2">
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Size</Text>
-                        <View className="justify-start flex-row items-center mt-2">
-
-                            <Pressable className="      h-5 w-5  bg-white rounded-full " onPress={size == !'S' ? () => setsize('S') : rang}  ><Text style={{ fontSize: 15 }} >S</Text></Pressable>
-                            <Pressable className=" ml-3     h-5 w-5 bg-white rounded-full " onPress={size == !'M' ? () => setsize('M') : rang}  ><Text style={{ fontSize: 15 }} >M</Text></Pressable>
-                            <Pressable className=" ml-3   h-5 w-5 bg-white rounded-full " onPress={size == !'L' ? () => setsize('L') : rang}  ><Text style={{ fontSize: 15 }} >L</Text></Pressable>
-                            <Pressable className=" ml-3     h-5 w-5 bg-white rounded-full " onPress={size == !'XL' ? () => setsize('XL') : rang}><Text style={{ fontSize: 15 }} >XL</Text></Pressable>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Size</Text>
+                        <View className="justify-start flex-row mt-2">
+                            <Pressable
+                                className="h-5 w-5 bg-white rounded-full"
+                                onPress={() => setsize('S')}
+                                style={{
+                                    alignItems: 'center', justifyContent: 'center',
+                                    borderColor: size === 'S' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'S' ? 2 : 0,
+                                }}
+                            >
+                                <Text style={{ fontSize: 15 }}>S</Text>
+                            </Pressable>
+                            <Pressable
+                                className="ml-3 h-5 w-5 bg-white rounded-full"
+                                onPress={() => setsize('M')}
+                                style={{
+                                    alignItems: 'center', justifyContent: 'center',
+                                    borderColor: size === 'M' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'M' ? 2 : 0,
+                                }}
+                            >
+                                <Text style={{ fontSize: 15 }}>M</Text>
+                            </Pressable>
+                            <Pressable
+                                className="ml-3 h-5 w-5 bg-white rounded-full"
+                                onPress={() => setsize('L')}
+                                style={{
+                                    alignItems: 'center', justifyContent: 'center', borderColor: size === 'L' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'L' ? 2 : 0,
+                                }}
+                            >
+                                <Text style={{ fontSize: 15 }}>L</Text>
+                            </Pressable>
+                            <Pressable
+                                className="ml-3 h-5 w-5 bg-white rounded-full"
+                                onPress={() => setsize('XL')}
+                                style={{
+                                    alignItems: 'center', justifyContent: 'center',
+                                    borderColor: size === 'XL' ? '#ebe8e8' : 'transparent',
+                                    borderWidth: size === 'XL' ? 2 : 0,
+                                }}
+                            >
+                                <Text style={{ fontSize: 15 }}>XL</Text>
+                            </Pressable>
                         </View>
-
                     </View>
                     <View className="mt-2 mb-4">
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Colour</Text>
-                        <View className="justify-start flex-row  mt-1">
-                            <Pressable onPress={rang == !'red' ? () => setrang('red') : rang}      ><Text style={{ backgroundColor: 'red' }} className="p-2        h-5 w-5  bg-white rounded-full"></Text></Pressable>
-                            <Pressable onPress={rang == !'green' ? () => setrang('green') : rang}  ><Text style={{ backgroundColor: 'green' }} className="p-2 ml-3  h-5 w-5 bg-white rounded-full "></Text></Pressable>
-                            <Pressable onPress={rang == !'blue' ? () => setrang('blue') : rang}    ><Text style={{ backgroundColor: 'blue' }} className="p-2 ml-3   h-5 w-5 bg-white rounded-full "></Text></Pressable>
-                            <Pressable onPress={rang == !'purple' ? () => setrang('purple') : rang}><Text style={{ backgroundColor: 'purple' }} className="p-2 ml-3 h-5 w-5 bg-white rounded-full "></Text></Pressable>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Colour</Text>
+                        <View className="justify-start flex-row mt-1">
+                            <Pressable
+                                onPress={() => setrang('red')}
+                                style={{
+                                    backgroundColor: 'red',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderColor: rang === 'red' ? 'white' : 'transparent',
+                                    borderWidth: rang === 'red' ? 2 : 0,
+                                }}
+                                className="p-2 h-5 w-5 rounded-full"
+                            ></Pressable>
+                            <Pressable
+                                onPress={() => setrang('green')}
+                                style={{
+                                    backgroundColor: 'green',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderColor: rang === 'green' ? 'white' : 'transparent',
+                                    borderWidth: rang === 'green' ? 2 : 0,
+                                }}
+                                className="p-2 ml-3 h-5 w-5 rounded-full"
+                            ></Pressable>
+                            <Pressable
+                                onPress={() => setrang('blue')}
+                                style={{
+                                    backgroundColor: 'blue',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderColor: rang === 'blue' ? 'white' : 'transparent',
+                                    borderWidth: rang === 'blue' ? 2 : 0,
+                                }}
+                                className="p-2 ml-3 h-5 w-5 rounded-full"
+                            ></Pressable>
+                            <Pressable
+                                onPress={() => setrang('purple')}
+                                style={{
+                                    backgroundColor: 'purple',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderColor: rang === 'purple' ? 'white' : 'transparent',
+                                    borderWidth: rang === 'purple' ? 2 : 0,
+                                }}
+                                className="p-2 ml-3 h-5 w-5 rounded-full"
+                            ></Pressable>
                         </View>
-
                     </View>
+
+
                     <View>
                         <Button
                             containerStyle={{ margin: 5, marginBottom: 5, borderRadius: 20 }}
@@ -91,7 +181,7 @@ function ProductDetails(props) {
                             linearGradientProps={null}
                             loadingProps={{ animating: true }}
                             loadingStyle={{}}
-                            onPress={() => navigation.navigate("Cart")}
+                            onPress={addToCart}
                             title="ADD TO CART"
                             titleProps={{}}
                         />

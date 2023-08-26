@@ -2,15 +2,26 @@ import React, { useState } from 'react'
 import { Text, View, TouchableWithoutFeedback, Dimensions, Image, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
+import { useCart } from './CartContex';
 
 function Card1({items}) {
+    const {disfav}=useCart();
     const [isFavourite, setIsFavourite] = useState(false);
     const navigation=useNavigation();
+ //Add Favorite
+ const addFav = () => {
+    setIsFavourite(!isFavourite)
+    const itemWithSizeAndRang = {
+        ...items
+    };
+    disfav({ type: 'add_to_favorite', item: itemWithSizeAndRang });
+};
+
     return (
         <View className="relative mt-6 mb-1">
             <TouchableWithoutFeedback onPress={()=>navigation.navigate("Product",{...items})}>
                 <Image
-                    source={items.image}
+                     source={{ uri: items.img }}
                     style={{
                         width: 156,
                         height: 200,
@@ -20,7 +31,7 @@ function Card1({items}) {
                 />
             </TouchableWithoutFeedback>
             <TouchableOpacity
-                onPress={() => setIsFavourite(!isFavourite)}
+                onPress={addFav }
                 className=" absolute p-2 rounded-full mt-2"
                 style={{ backgroundColor: 'rgba(255,255,255,0.3)', marginLeft: 115 }}
 
