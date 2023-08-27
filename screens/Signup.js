@@ -3,17 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../Firebase/Firebase';
-import { Toast } from 'native-base';
-<<<<<<< HEAD
+import { auth ,db} from '../Firebase/Firebase';
+// import { Toast } from 'native-base';
 import { themeColors } from '../theme';
-=======
-import { showMessage } from 'react-native-flash-message';
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
-
+import { setDoc, doc } from 'firebase/firestore';
 function Signup() {
     const navigation = useNavigation();
-
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isRegistered, setRegistered] = useState(false); // To show "Registered" message
@@ -27,10 +23,17 @@ function Signup() {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 console.log('User registered:', userCredential.user);
                 setRegistered(true); // Set the registered state to show the success message
-                Toast.show({title: "Account verified",
-                variant: "solid",
-                description: "Thanks for signing up with us.",
-                isClosable: true});
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    name: name,
+                    email: email,
+                    _id: userCredential.user.uid,
+                    profileImage: ''
+                });
+                
+                // Toast.show({title: "Account verified",
+                // variant: "solid",
+                // description: "Thanks for signing up with us.",
+                // isClosable: true});
                 navigation.goBack();
             } catch (error) {
                 console.error('Error registering user:', error.message);
@@ -50,6 +53,8 @@ function Signup() {
                     <Text style={styles.inputLabel}>First Name</Text>
                     <TextInput
                         style={styles.inputField}
+                        value={name}
+                        onChangeText={value => setName(value)}
                         placeholder='Type your first name'
                     />
                 </View>
@@ -91,7 +96,6 @@ function Signup() {
                 </TouchableOpacity>
 
                 <View className="flex-row mt-8  justify-center space-x-12">
-<<<<<<< HEAD
                     <TouchableOpacity className="p-2 bg-gray-100 rounded-full">
                         <Image source={require('../assets/icons/google.png')}
                             className="w-10 h-10" />
@@ -101,17 +105,6 @@ function Signup() {
                             className="w-10 h-10" />
                     </TouchableOpacity>
                     <TouchableOpacity className="p-2 bg-gray-100 rounded-full">
-=======
-                    <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-                        <Image source={require('../assets/icons/google.png')}
-                            className="w-10 h-10" />
-                    </TouchableOpacity>
-                    <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-                        <Image source={require('../assets/icons/apple.png')}
-                            className="w-10 h-10" />
-                    </TouchableOpacity>
-                    <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                         <Image source={require('../assets/icons/facebook.png')}
                             className="w-10 h-10" />
                     </TouchableOpacity>
@@ -131,29 +124,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-<<<<<<< HEAD
         backgroundColor: themeColors.bg,
-=======
-        backgroundColor: '#fff',
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
     },
     loginContainer: {
         flex: 1,
         marginTop: '30%',
-<<<<<<< HEAD
         marginHorizontal: 35,
     },
     title: {
         color: themeColors.text,
         fontSize: 70,
         fontWeight: '500',
-=======
-        marginHorizontal: 42,
-    },
-    title: {
-        fontSize: 70,
-        fontWeight: '700',
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         marginBottom: 30,
         textAlign: 'center',
     },
@@ -161,14 +142,9 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     inputLabel: {
-<<<<<<< HEAD
         fontSize: 20,
         fontWeight: '600',
         color: themeColors.text
-=======
-        fontSize: 25,
-        fontWeight: '700',
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
     },
     inputField: {
         height: 40,
@@ -180,11 +156,7 @@ const styles = StyleSheet.create({
         height: 52,
         borderRadius: 40,
         marginTop:35,
-<<<<<<< HEAD
         backgroundColor: themeColors.text,
-=======
-        backgroundColor: 'blue',
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         justifyContent: 'center',
         alignItems: 'center',
     },

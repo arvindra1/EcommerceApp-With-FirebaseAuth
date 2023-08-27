@@ -22,11 +22,7 @@ export default function App() {
   };
 
   return (
-<<<<<<< HEAD
     
-=======
-    <NativeBaseProvider>
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
     <NavigationContainer>
       {/* Conditionally render Auth or MyTabs based on the login state */}
       <CartProvider>
@@ -36,10 +32,6 @@ export default function App() {
         <Auth onLogin={handleLogin} />
       )}</CartProvider>
     </NavigationContainer>
-<<<<<<< HEAD
    
-=======
-    </NativeBaseProvider>
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
   );
 }

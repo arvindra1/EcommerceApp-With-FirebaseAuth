@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { themeColors } from '../../theme';
@@ -132,15 +131,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-=======
-import { View, Text } from 'react-native'
-import React from 'react'
-
-export default function Address() {
-  return (
-    <View>
-      <Text>Address</Text>
-    </View>
-  )
-}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd

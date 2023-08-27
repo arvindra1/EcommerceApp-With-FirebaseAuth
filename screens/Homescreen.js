@@ -1,12 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { Text, View, Image, TextInput, TouchableOpacity, DrawerLayoutAndroid, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Avatar, Icon } from 'react-native-elements';
 import Card1 from '../components/Card';
-import { Skeleton, VStack, Center, NativeBaseProvider } from "native-base";
 import { ScrollView } from 'react-native';
 import NavigationView from '../components/NavigationView';
-<<<<<<< HEAD
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase';
 import { useCart } from '../components/CartContex';
@@ -14,30 +12,17 @@ import { Skeleton } from 'moti/skeleton';
 import { themeColors } from '../theme';
 
 
-const product=[1,2,3,4,5,6,7,8,9,10];
+const product = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 function Homescreen() {
 
   const { setdataUser, datauser, userUID } = useCart();
-=======
-import { product } from '../data';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../Firebase/Firebase';
-
-function Homescreen() {
-
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
   const [searchInput, setSearchInput] = useState('');
   const [allProducts, setAllProducts] = useState([]); // Store all products
   const [filteredProducts, setFilteredProducts] = useState([]); // Store filtered products
   const [isLoading, setisLoading] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('');
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter);
 
@@ -68,18 +53,19 @@ function Homescreen() {
         allData.push(doc.data());
       });
       console.log(allData);
-<<<<<<< HEAD
       setisLoading(true);
       setAllProducts(allData);
-=======
-      setAllProducts(allData);
-      setisLoading(true);
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
       setFilteredProducts(allData); // Initially display all products
     } catch (error) {
       console.error('Error fetching products:', error);
     }
   };
+
+  //
+  const avatarSource = datauser.profileImage ? { uri: datauser.profileImage } : null;
+
+  const first = datauser.name ? datauser.name[0].toUpperCase() : '';
+
 
   const handleSearch = () => {
     if (searchInput.trim() === '') {
@@ -96,14 +82,13 @@ function Homescreen() {
 
   };
 
-<<<<<<< HEAD
   //Profile Details is Fetching
   const fetchProfile = async () => {
     try {
       const userDocRef = doc(db, 'users', userUID);
       console.log('Fetching profile for user:', userUID);
       const userDocSnapshot = await getDoc(userDocRef);
-  
+
       if (userDocSnapshot.exists()) {
         const userData = userDocSnapshot.data();
         console.log('User data:', userData);
@@ -117,16 +102,12 @@ function Homescreen() {
       console.error('Error fetching profile:', error);
     }
   };
-  
+
 
 
   useEffect(() => {
     fetchAllProducts();
     fetchProfile();
-=======
-  useEffect(() => {
-    fetchAllProducts();
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
   }, []);
 
 
@@ -144,7 +125,6 @@ function Homescreen() {
         <View style={{ marginTop: 32, marginLeft: 16, marginRight: 16, flexDirection: 'column' }}>
           <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
             <Icon onPress={openDrawer}
-<<<<<<< HEAD
               size={26}
               containerStyle={{
                 justifyContent: 'center',
@@ -162,29 +142,13 @@ function Homescreen() {
                   // Handle icon press event
                 }}
               />
-              <Image
-                style={{ width: 42, height: 42, borderRadius: 20, marginLeft: 10 }}
-                source={{ uri: datauser.profileImage }}
+              <Avatar
+                title={first}
+                 rounded={true}
+                 marginLeft={8}
+                source={avatarSource}
               />
             </View>
-=======
-              size={22}
-              containerStyle={{
-                width: 42,
-                height: 42,
-                borderRadius: 20,
-                backgroundColor: 'white',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              type='foundation'
-              name='thumbnails'
-            />
-            <Image
-              style={{ width: 42, height: 42, borderRadius: 20 }}
-              source={require('../assets/profile.jpg')}
-            />
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
           </View>
 
           <View>
@@ -225,63 +189,29 @@ function Homescreen() {
                 </TouchableOpacity>
               </View>
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-<<<<<<< HEAD
                 {filteredProducts.map((item) => (
 
                   <Card1 items={item} key={item.id} />
-=======
-                {filteredProducts.map((item, key) => (
-
-                  <Card1 items={item} key={key} />
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
 
                 ))}
 
 
-<<<<<<< HEAD
-              </View></>) : (  <>
-      <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between',marginBottom: 15 }}>
-        <Skeleton width={156} height={33} colorMode='light' radius='round' />
-        <Skeleton width={67} height={33}  colorMode='light' radius='round' />
-        <Skeleton width={67} height={33}  colorMode='light' radius='round' />
-      </View>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-        {product.map((key) => (
-          <View key={key.id} className="flex-column justify-between items-end" style={{ marginVertical: 4, width: 156, height: 200, overflow: 'hidden',borderRadius:20,borderWidth:0.5,backgroundColor:themeColors.text,opacity:0.3,padding:10 }}>
-          <Skeleton width={30} height={30} colorMode='light' radius="round"    />
-          <Skeleton width="100%" height={48} colorMode='light' radius="round"   />
-           
-          </View>
-        ))}
-      </View>
-    </>)}
-=======
               </View></>) : (<>
-                <View className="mt-6 flex-row justify-between">
-                  <Skeleton w="156" borderWidth={1} borderColor="coolGray.300" h="33" rounded="full" startColor="coolGray.300" />
-                  <Skeleton w="67" borderWidth={1} borderColor="coolGray.300" h="33" rounded="full" startColor="coolGray.300" />
-                  <Skeleton w="67" borderWidth={1} borderColor="coolGray.300" h="33" rounded="full" startColor="coolGray.300" />
+                <View style={{ marginTop: 15, flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
+                  <Skeleton width={156} height={33} colorMode='light' radius='round' />
+                  <Skeleton width={67} height={33} colorMode='light' radius='round' />
+                  <Skeleton width={67} height={33} colorMode='light' radius='round' />
                 </View>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                  {product.map((key) => {
-                    return (
-                      <VStack key={key} my="4" w="156" h="200" borderWidth="1" overflow="hidden" rounded="lg" _dark={{
-                        borderColor: "coolGray.100"
-                      }} _light={{
-                        borderColor: "coolGray.300"
-                      }}>
-                        <Skeleton h="100%" />
-                        <Skeleton borderWidth={1} borderColor="coolGray.300" size="8" ml="110" mt="2" className="absolute" startColor="amber.50" rounded="full" />
+                  {product.map((key) => (
+                    <View key={key.id} className="flex-column justify-between items-end" style={{ marginVertical: 4, width: 156, height: 200, overflow: 'hidden', borderRadius: 20, borderWidth: 0.5, backgroundColor: themeColors.text, opacity: 0.3, padding: 10 }}>
+                      <Skeleton width={30} height={30} colorMode='light' radius="round" />
+                      <Skeleton width="100%" height={48} colorMode='light' radius="round" />
 
-                        {/* <Skeleton mt="150" className="absolute"  h="10" my="2" rounded="full" startColor="primary.100">
-                        
-                      </Skeleton> */}
-                        <Skeleton h="10" ml="2" w="138" mt="150" borderWidth={0.5} borderColor="coolGray.300" className="absolute" rounded="full" startColor=".50" />
-                      </VStack>)
-                  })}
-
-                </View></>)}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
+                    </View>
+                  ))}
+                </View>
+              </>)}
 
           </ScrollView>
 
@@ -289,7 +219,7 @@ function Homescreen() {
 
       </View>
     </DrawerLayoutAndroid>
-   
+
   );
 }
 

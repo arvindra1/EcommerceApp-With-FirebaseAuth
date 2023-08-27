@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon, Avatar } from 'react-native-elements';
@@ -129,50 +128,18 @@ const ProfileScreen = () => {
         style={styles.input}
         value={name}
         onChangeText={(value) => setName(value)}
-=======
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Avatar } from 'native-base';
-
-const ProfileScreen = () => {
-  const [name, setName] = useState('Arvindra Ahirwar');
-  const [number, setNumber] = useState('+917651853228');
-  const [email, setEmail] = useState('kumararvindra7691@gmail.com');
-
-  const handleSave = () => {
-    // Implement logic to save updated profile details
-  };
-
-  return (
-    <View style={styles.container}>
-             <Avatar  mb={6} bg="purple.600" alignSelf="center" size="2xl" >
-          A
-        </Avatar>
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         placeholder="Name"
       />
       <TextInput
         style={styles.input}
         value={number}
-<<<<<<< HEAD
         onChangeText={(value) => setNumber(value)}
-=======
-        onChangeText={setNumber}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         placeholder="Number"
       />
       <TextInput
         style={styles.input}
         value={email}
-<<<<<<< HEAD
         onChangeText={(value) => setEmail(value)}
-=======
-        onChangeText={setEmail}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
         placeholder="Email"
       />
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
@@ -187,11 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-<<<<<<< HEAD
     backgroundColor: '#ebe8e8',
-=======
-    backgroundColor: '#fff',
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
   },
   profileImage: {
     width: 120,
@@ -203,13 +166,8 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 40,
     borderWidth: 1,
-<<<<<<< HEAD
     borderColor: themeColors.text,
     borderRadius: 20,
-=======
-    borderColor: '#ccc',
-    borderRadius: 8,
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
     paddingHorizontal: 10,
     marginBottom: 10,
   },
@@ -217,11 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DF5F5F',
     paddingVertical: 10,
     paddingHorizontal: 20,
-<<<<<<< HEAD
     borderRadius: 20,
-=======
-    borderRadius: 8,
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
     marginTop: 10,
   },
   buttonText: {

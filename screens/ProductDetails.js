@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, TouchableOpacity, Image, Alert, ScrollView, Pressable } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Card, Button } from 'react-native-elements';
@@ -11,11 +11,7 @@ function ProductDetails(props) {
     const navigation = useNavigation();
     const [rang, setrang] = useState('');
     const [size, setsize] = useState('');
-<<<<<<< HEAD
-    const { dispatch, datauser } = useCart();
-=======
-    const { dispatch } = useCart();
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
+    const { dispatch, datauser , isCart, setCart } = useCart();
 
     const addToCart = () => {
         const itemWithSizeAndRang = {
@@ -24,7 +20,16 @@ function ProductDetails(props) {
             selectedRang: rang,
         };
         dispatch({ type: 'ADD_TO_CART', item: itemWithSizeAndRang });
+        setCart(false);
     };
+
+    const removeFromCart = (id) => {
+
+        dispatch({ type: 'REMOVE_FROM_CART', id });
+        setCart(true);
+        
+    };
+
 
 
     return (
@@ -49,7 +54,7 @@ function ProductDetails(props) {
                     />
                     <Image
                         style={{ width: 42, height: 42, borderRadius: 20 }}
-                        source={{ uri: datauser.profileImage }}
+                        source={{uri:datauser.profileImage}}
                     />
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -80,67 +85,36 @@ function ProductDetails(props) {
                             <Pressable
                                 className="h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('S')}
-<<<<<<< HEAD
-                                style={{
-                                    alignItems: 'center', justifyContent: 'center',
-                                    borderColor: size === 'S' ? '#ebe8e8' : 'transparent',
-                                    borderWidth: size === 'S' ? 2 : 0,
-                                }}
-=======
                                 style={{ alignItems: 'center', justifyContent: 'center',
                                 borderColor: size === 'S' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'S' ? 2 : 0, }}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>S</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('M')}
-<<<<<<< HEAD
-                                style={{
-                                    alignItems: 'center', justifyContent: 'center',
-                                    borderColor: size === 'M' ? '#ebe8e8' : 'transparent',
-                                    borderWidth: size === 'M' ? 2 : 0,
-                                }}
-=======
                                 style={{ alignItems: 'center', justifyContent: 'center',
                                 borderColor: size === 'M' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'M' ? 2 : 0, }}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>M</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('L')}
-<<<<<<< HEAD
-                                style={{
-                                    alignItems: 'center', justifyContent: 'center', borderColor: size === 'L' ? '#ebe8e8' : 'transparent',
-                                    borderWidth: size === 'L' ? 2 : 0,
-                                }}
-=======
                                 style={{ alignItems: 'center', justifyContent: 'center',  borderColor: size === 'L' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'L' ? 2 : 0, }}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>L</Text>
                             </Pressable>
                             <Pressable
                                 className="ml-3 h-5 w-5 bg-white rounded-full"
                                 onPress={() => setsize('XL')}
-<<<<<<< HEAD
-                                style={{
-                                    alignItems: 'center', justifyContent: 'center',
-                                    borderColor: size === 'XL' ? '#ebe8e8' : 'transparent',
-                                    borderWidth: size === 'XL' ? 2 : 0,
-                                }}
-=======
                                 style={{ alignItems: 'center', justifyContent: 'center',
                                 borderColor: size === 'XL' ? '#ebe8e8' : 'transparent',
                                     borderWidth: size === 'XL' ? 2 : 0,
                                  }}
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
                             >
                                 <Text style={{ fontSize: 15 }}>XL</Text>
                             </Pressable>
@@ -198,7 +172,8 @@ function ProductDetails(props) {
 
 
                     <View>
-                        <Button
+
+                       {isCart?( <Button
                             containerStyle={{ margin: 5, marginBottom: 5, borderRadius: 20 }}
                             disabledStyle={{
                                 borderWidth: 2,
@@ -212,7 +187,21 @@ function ProductDetails(props) {
                             onPress={addToCart}
                             title="ADD TO CART"
                             titleProps={{}}
-                        />
+                        />):(<Button
+                            containerStyle={{ margin: 5, marginBottom: 5, borderRadius: 20 }}
+                            disabledStyle={{
+                                borderWidth: 2,
+                                borderColor: "#DF5F5F"
+                            }}
+                            buttonStyle={{ backgroundColor: '#DF5F5F' }}
+                            disabledTitleStyle={{ color: "#00F" }}
+                            linearGradientProps={null}
+                            loadingProps={{ animating: true }}
+                            loadingStyle={{}}
+                            onPress={()=>removeFromCart(product.id)}
+                            title="REMOVE FROM CART"
+                            titleProps={{}}
+                        />)}
                     </View>
 
                 </ScrollView>

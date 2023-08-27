@@ -5,21 +5,15 @@ import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import CartCard from '../components/CartCard';
 import { useCart } from '../components/CartContex';
-<<<<<<< HEAD
 import { themeColors } from '../theme';
-=======
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
 
 function Cart() {
     const navigation = useNavigation();
 
-<<<<<<< HEAD
-    const { cartItems, dispatch, dataUser } = useCart();
-=======
-    const { cartItems, dispatch } = useCart();
->>>>>>> 6d347b541c099b35ae1fd135ce838a0abdc1fdfd
+    const { cartItems, dispatch, dataUser, setCart } = useCart();
 
     const removeFromCart = (id) => {
+        setCart(true);
         dispatch({ type: 'REMOVE_FROM_CART', id });
     };
 

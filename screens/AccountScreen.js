@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { signOut } from 'firebase/auth';
+import { signout } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase';
 import { useNavigation } from '@react-navigation/native';
 
